@@ -78,9 +78,12 @@ A simple backend built with **Node.js**, **Express**, and **MongoDB (Mongoose)**
   "author": "String",
   "numberOfViews": "Number"
 }
+```
 
-
-## Author
+### Author
 
 **Mohammed Diab**
+
+```
+
 ```
