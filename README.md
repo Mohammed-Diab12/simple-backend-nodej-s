@@ -67,17 +67,16 @@ The API is deployed on Render: [https://simple-backend-nodej-s.onrender.com](htt
 | `PORT`        | Port the server listens on |
 | `MONGODB_URI` | MongoDB connection string  |
 
-> **Never commit your `.env` file.** It is already listed in `.gitignore`.
-
 ## API Endpoints
 
-| Method   | Endpoint        | Description                       |
-| -------- | --------------- | --------------------------------- |
-| `POST`   | `/article`      | Create a new article              |
-| `GET`    | `/articles`     | Get all articles (JSON)           |
-| `GET`    | `/articles/:id` | Get a single article by ID        |
-| `DELETE` | `/articles/:id` | Delete an article by ID           |
-| `GET`    | `/showarticles` | View all articles as an HTML page |
+| Method   | Endpoint              | Description                       |
+| -------- | --------------------- | --------------------------------- |
+| `POST`   | `/article`            | Create a new article              |
+| `GET`    | `/articles`           | Get all articles (JSON)           |
+| `GET`    | `/articles/:id`       | Get a single article by ID        |
+| `DELETE` | `/articles/:id`       | Delete an article by ID           |
+| `GET`    | `/showarticles`       | View all articles as an HTML page |
+| `PUT`    | `/UpdateArticles/:id` | Update an article by ID           |
 
 ### Article Schema
 
@@ -123,20 +122,15 @@ curl https://simple-backend-nodej-s.onrender.com/articles/ARTICLE_ID
 curl -X DELETE https://simple-backend-nodej-s.onrender.com/articles/ARTICLE_ID
 ```
 
-## Project Structure
-
-```
-articles-api/
-├── models/
-│   └── Article.js        # Mongoose schema
-├── views/
-│   ├── home.ejs          # Home page template
-│   └── Articles.ejs      # Articles page template
-├── index.js              # App entry point
-├── package.json
-├── .env.example
-├── .gitignore
-└── README.md
+```bash
+curl -X PUT https://simple-backend-nodej-s.onrender.com/UpdateArticles/ARTICLE_ID \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Updated Title",
+    "content": "Updated content",
+    "author": "Mohammed",
+    "numberOfViews": 10
+  }'
 ```
 
 ## Author
