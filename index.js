@@ -14,12 +14,16 @@ mongoose
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.render("home.ejs", {
-    age: req.query.age,
-    ID: req.query.id,
-    user: { name: "Mohammed Diab" },
-  });
+app.get("/", async (req, res) => {
+  try {
+    const allArticles = await Article.find();
+    res.render("Articles.ejs", {
+      Articles: allArticles,
+    });
+  } catch (error) {
+    console.error("error in showArticles page", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get("/testparam/:id/:name", (req, res) => {
@@ -108,6 +112,41 @@ app.get("/showarticles", async (req, res) => {
   } catch (error) {
     console.error("error in showArticles page", error);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+app.put("/UpdateArticles/:artID", async (req, res) => {
+  const id = req.params.artID;
+  const { title, content, author, numberOfViews } = req.body;
+
+  try {
+    const updatedArticle = await Article.findByIdAndUpdate(
+      id,
+      {
+        title,
+        content,
+        author,
+        numberOfViews,
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!updatedArticle) {
+      return res.status(404).json({
+        message: "Article not found",
+      });
+    }
+
+    res.json(updatedArticle);
+  } catch (error) {
+    console.error("Error updating article:", error);
+
+    res.status(500).json({
+      message: "Error updating article",
+    });
   }
 });
 

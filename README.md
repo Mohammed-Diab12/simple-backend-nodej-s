@@ -2,6 +2,12 @@
 
 A simple backend built with **Node.js**, **Express**, and **MongoDB (Mongoose)** for managing articles. It provides a REST API for creating, reading, and deleting articles, plus a server-rendered HTML page (EJS) that displays them.
 
+## Live Demo
+
+The API is deployed on Render: [https://simple-backend-nodej-s.onrender.com](https://simple-backend-nodej-s.onrender.com/)
+
+> The app runs on Render's free tier, so the first request after a period of inactivity may take up to a minute to respond.
+
 ## Features
 
 - Create, list, fetch, and delete articles through a JSON API
@@ -49,8 +55,10 @@ A simple backend built with **Node.js**, **Express**, and **MongoDB (Mongoose)**
 4. Start the server:
 
    ```bash
-   npm start OR npm index.js
+   npm start
    ```
+
+   The server runs at `http://localhost:3000`.
 
 ## Environment Variables
 
@@ -58,6 +66,8 @@ A simple backend built with **Node.js**, **Express**, and **MongoDB (Mongoose)**
 | ------------- | -------------------------- |
 | `PORT`        | Port the server listens on |
 | `MONGODB_URI` | MongoDB connection string  |
+
+> **Never commit your `.env` file.** It is already listed in `.gitignore`.
 
 ## API Endpoints
 
@@ -80,10 +90,55 @@ A simple backend built with **Node.js**, **Express**, and **MongoDB (Mongoose)**
 }
 ```
 
-### Author
+### Example Requests
+
+**Create an article**
+
+```bash
+curl -X POST https://simple-backend-nodej-s.onrender.com/article \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "My First Article",
+    "content": "Hello, world!",
+    "author": "Mohammed",
+    "numberOfViews": 0
+  }'
+```
+
+**Get all articles**
+
+```bash
+curl https://simple-backend-nodej-s.onrender.com/articles
+```
+
+**Get one article**
+
+```bash
+curl https://simple-backend-nodej-s.onrender.com/articles/ARTICLE_ID
+```
+
+**Delete an article**
+
+```bash
+curl -X DELETE https://simple-backend-nodej-s.onrender.com/articles/ARTICLE_ID
+```
+
+## Project Structure
+
+```
+articles-api/
+├── models/
+│   └── Article.js        # Mongoose schema
+├── views/
+│   ├── home.ejs          # Home page template
+│   └── Articles.ejs      # Articles page template
+├── index.js              # App entry point
+├── package.json
+├── .env.example
+├── .gitignore
+└── README.md
+```
+
+## Author
 
 **Mohammed Diab**
-
-```
-
-```
