@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mohammed's Articles</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f4f7fb;
+        color: #1e293b;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 50px 24px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        font-size: 36px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 16px;
+      }
+
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .article-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 26px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .article-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+
+      .article-card h2 {
+        font-size: 22px;
+        line-height: 1.4;
+        color: #2563eb;
+        overflow-wrap: anywhere;
+      }
+
+      .article-content {
+        color: #475569;
+        font-size: 15px;
+        overflow-wrap: anywhere;
+        flex-grow: 1;
+      }
+
+      .article-footer {
+        border-top: 1px solid #e2e8f0;
+        padding-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .author {
+        color: #334155;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .views {
+        background: #eff6ff;
+        color: #2563eb;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        color: #64748b;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Mohammed's Articles</h1>
+        <p>Explore ideas, insights, and the latest articles.</p>
+      </header>
+
+      <% if (Articles.length === 0) { %>
+        <div class="empty-state">
+          <h2>No articles yet</h2>
+          <p>Check back later for new articles.</p>
+        </div>
+      <% } else { %>
+        <section class="articles-grid">
+          <% for (let article of Articles) { %>
+            <article class="article-card">
+              <h2><%= article.title %></h2>
+
+              <p class="article-content">
+                <%= article.content %>
+              </p>
+
+              <footer class="article-footer">
+                <span class="author">
+                  By <%= article.author %>
+                </span>
+
+                <span class="views">
+                  <%= article.numberOfViews %> views
+                </span>
+              </footer>
+            </article>
+          <% } %>
+        </section>
+      <% } %>
+    </main>
+  </body>
+</html>
+```
